@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
 import AlbumDetail from './AlbumDetail';
 
@@ -32,9 +32,5 @@ class AlbumList extends React.Component {
         )
     }
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default AlbumList;

@@ -5,8 +5,8 @@ import {Button, Card, CardSection, Input, Spinner} from '../common'
 
 class LoginForm extends Component {
     state = {
-        email: '',
-        password: '',
+        email: 'dennis@gmail.com',
+        password: '123456',
         error: '',
         loading: false
     };
@@ -28,7 +28,7 @@ class LoginForm extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess)
             .catch(() => {
-                firebase.auth().createUserWithEmailAndPassword(email.password)
+                firebase.auth().createUserWithEmailAndPassword(email, password)
                     .then(this.onLoginSuccess)
                     .catch(this.onLoginFail)
             });

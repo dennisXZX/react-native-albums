@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import { StyleSheet, View } from 'react-native';
-import { Button, Header, Spinner } from './src/components/common';
+import {Button, Card, CardSection, Header, Spinner} from './src/components/common';
 import LoginForm from './src/components/Auth/LoginForm';
 import AlbumList from './src/components/Album/AlbumList';
 
@@ -36,20 +36,34 @@ export default class App extends React.Component {
     renderContent = () => {
         switch (this.state.loggedIn) {
             case true:
-                return <Button>Log Out</Button>;
+                return (
+                    <Card>
+                        <CardSection>
+                            <Button onPress={() => firebase.auth().signOut()}>
+                                Log Out
+                            </Button>
+                        </CardSection>
+                    </Card>
+                );
             case false:
                 return <LoginForm />;
             default:
-                return <Spinner size='large' />
+                return (
+                    <Card>
+                        <CardSection>
+                            <Spinner size='large' />
+                        </CardSection>
+                    </Card>
+                )
         }
     };
 
     render() {
         return (
-            <View style={styles.container}>
+            <View>
                 <Header headerText='Albums' />
                 {this.renderContent()}
-                <AlbumList/>
+                <AlbumList />
             </View>
         );
     }

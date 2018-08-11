@@ -1,13 +1,14 @@
 import React from 'react';
 import firebase from 'firebase';
-import { StyleSheet, View } from 'react-native';
-import {Button, Card, CardSection, Header, Spinner} from './src/components/common';
+import { View, Text } from 'react-native';
+import { Button, Card, CardSection, Header, Spinner } from './src/components/common';
 import LoginForm from './src/components/Auth/LoginForm';
 import AlbumList from './src/components/Album/AlbumList';
 
 export default class App extends React.Component {
     state = {
-        loggedIn: null
+        loggedIn: null,
+        user: null
     };
 
     componentDidMount() {
@@ -24,10 +25,12 @@ export default class App extends React.Component {
         // keep track of authentication state change
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                console.log('onAuthStateChanged true');
-                this.setState({ loggedIn: true });
+                console.log('onAuthStateChanged true', user.email);
+                this.setState({
+                    loggedIn: true,
+                    user: user.email
+                });
             } else {
-                console.log('onAuthStateChanged false');
                 this.setState({ loggedIn: false });
             }
         });
@@ -38,6 +41,9 @@ export default class App extends React.Component {
             case true:
                 return (
                     <Card>
+                        <View style={{ alignItems: 'center', marginTop: 5, marginBottom: 5 }}>
+                            <Text>Welcome back {this.state.user}</Text>
+                        </View>
                         <CardSection>
                             <Button onPress={() => firebase.auth().signOut()}>
                                 Log Out
@@ -68,10 +74,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff'
-    },
-});

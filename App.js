@@ -14,12 +14,7 @@ export default class App extends React.Component {
     componentDidMount() {
         // initialize firebase
         firebase.initializeApp({
-            apiKey: "AIzaSyDrZ4xYseIhxdgAjA4topcGOFhAif4FhCU",
-            authDomain: "vue-authentication-67776.firebaseapp.com",
-            databaseURL: "https://vue-authentication-67776.firebaseio.com",
-            projectId: "vue-authentication-67776",
-            storageBucket: "vue-authentication-67776.appspot.com",
-            messagingSenderId: "301659999369"
+            // use the config file info in the Authentication tab of Firebase
         });
 
         // keep track of authentication state change
